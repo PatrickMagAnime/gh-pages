@@ -9,6 +9,11 @@
             margin: 0;
             font-family: Arial, sans-serif;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 100%);
         }
         .background {
             position: absolute;
@@ -22,6 +27,17 @@
             text-align: center;
             background: rgba(0, 0, 0, 0.5);
             color: #fff;
+        }
+        .container {
+            text-align: center;
+        }
+        .animated-text {
+            font-size: 3em;
+            animation: fadeIn 2s ease-in-out infinite alternate;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
         .search-bar {
             width: 80%;
@@ -54,8 +70,12 @@
     <div class="background" id="background"></div>
     <header>
         <h1>PatrickMagAnime Portfolio</h1>
-        <input type="text" class="search-bar" placeholder="Search...">
+        <input type="text" class="search-bar" placeholder="Search my projects..." oninput="searchProjects()">
     </header>
+    <div class="container">
+        <div class="animated-text">Welcome to My Projects</div>
+        <div id="results"></div>
+    </div>
     <div class="content">
         <h2>About Me</h2>
         <p>This is where you can add information about yourself.</p>
@@ -65,6 +85,13 @@
         <button class="button">Project 2</button>
     </div>
     <script>
+        const projects = ["Project 1", "Project 2", "Project 3"]; // You can add more projects here
+        function searchProjects() {
+            const query = document.querySelector('.search-bar').value.toLowerCase();
+            const results = projects.filter(project => project.toLowerCase().includes(query));
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = results.map(project => `<a href="https://github.com/PatrickMagAnime/${project.replace(/\s+/g, '-').toLowerCase()}">${project}</a>`).join('<br>');
+        }
         document.addEventListener('mousemove', (e) => {
             const x = e.clientX / window.innerWidth;
             const y = e.clientY / window.innerHeight;

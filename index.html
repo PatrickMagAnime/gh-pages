@@ -1,118 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PatrickMagAnime Portfolio</title>
+    <!-- Bootstrap 5 CSS einbinden -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 100%);
-        }
-        .background {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            transition: background 0.3s ease;
-        }
-        header {
-            padding: 20px;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.5);
-            color: #fff;
-        }
-        .container {
-            text-align: center;
-        }
-        .animated-text {
-            font-size: 3em;
-            animation: fadeIn 2s ease-in-out infinite alternate;
-        }
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        .search-bar {
-            width: 80%;
-            padding: 10px;
-            margin: 20px 0;
-            border: none;
-            border-radius: 5px;
-        }
-        .content {
-            padding: 20px;
-            text-align: center;
-        }
-        .button {
-            padding: 15px 30px;
-            margin: 10px;
-            background: #3498db;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.2s;
-        }
-        .button:hover {
-            transform: scale(1.1);
-            background: #2980b9;
-        }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: transparent;
+        overflow-x: hidden; /* Um horizontales Scrollen zu vermeiden */
+      }
+      .background {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Hintergrund hinter allem anderen */
+        transition: filter 0.1s ease;
+      }
+      .search-bar-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 20px;
+        position: relative;
+      }
+      .search-bar-container img {
+        width: 30px; /* Größe des PNG-Icons */
+        margin-right: 10px;
+      }
+      .search-bar {
+        width: 300px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        background: transparent;
+        color: #fff;
+      }
+      .search-bar::placeholder {
+        color: #fff;
+      }
+      .search-bar-container::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        height: 2px;
+        background: #000;
+      }
+      .container {
+        text-align: center;
+        margin-top: calc(50vh - 40px); /* Adjusted to center Welcome text */
+      }
+      .animated-text {
+        font-size: 3em;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+      .content {
+        padding: 20px;
+        text-align: center;
+        margin-top: 80vh; /* Adjusted for better positioning of About Me and Projects */
+      }
+      .content h2,
+      .content p,
+      .content .button {
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+      .button {
+        padding: 15px 30px;
+        margin: 10px;
+        background: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.2s, background 0.2s;
+      }
+      .button:hover {
+        transform: scale(1.1);
+        background: #2980b9;
+      }
+      .about-projects {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="background" id="background"></div>
+
     <header>
-        <h1>PatrickMagAnime Portfolio</h1>
-        <input type="text" class="search-bar" placeholder="Search my projects..." oninput="searchProjects()">
+      <!-- Suchleiste mit Icon -->
+      <div class="search-bar-container">
+        <img src="suchleiste.png" alt="Search Icon" />
+        <!-- Hier das Such-Icon einfügen -->
+        <input
+          type="text"
+          class="search-bar"
+          placeholder="Search my projects..."
+          oninput="searchProjects()"
+        />
+      </div>
     </header>
+
     <div class="container">
-        <div class="animated-text">Welcome to My Projects</div>
-        <div id="results"></div>
+      <div class="animated-text" id="welcome-text">Welcome to My Projects</div>
+      <div id="results"></div>
+      <!-- Hier werden die Suchergebnisse angezeigt -->
     </div>
+
     <div class="content">
-        <h2>About Me</h2>
-        <p>This is where you can add information about yourself.</p>
-        <h2>Projects</h2>
-        <p>This is where you can add information about your projects.</p>
-        <button class="button">Project 1</button>
-        <button class="button">Project 2</button>
+      <div class="about-projects">
+        <div>
+          <h2 class="fade-in">About Me</h2>
+          <p class="fade-in">
+            This is where you can add information about yourself.
+          </p>
+          <!-- Hier kannst du deinen Text über dich einfügen -->
+        </div>
+        <div>
+          <h2 class="fade-in">Projects</h2>
+          <p class="fade-in">
+            This is where you can add information about your projects.
+          </p>
+          <!-- Hier kannst du deinen Text über Projekte einfügen -->
+          <button class="button fade-in">Project 1</button>
+          <button class="button fade-in">Project 2</button>
+        </div>
+      </div>
     </div>
+
     <script>
-        const projects = ["Project 1", "Project 2", "Project 3"]; // You can add more projects here
+      const projects = ["Project 1", "Project 2", "Project 3"]; // Du kannst hier weitere Projekte hinzufügen
 
-        function searchProjects() {
-            const query = document.querySelector('.search-bar').value.toLowerCase();
-            const results = projects.filter(project => project.toLowerCase().includes(query));
-            const resultsContainer = document.getElementById('results');
-            resultsContainer.innerHTML = results.map(project => `<a href="https://github.com/PatrickMagAnime/${project.replace(/\s+/g, '-').toLowerCase()}">${project}</a>`).join('<br>');
-        }
+      function searchProjects() {
+        const query = document.querySelector(".search-bar").value.toLowerCase();
+        const results = projects.filter((project) =>
+          project.toLowerCase().includes(query)
+        );
+        const resultsContainer = document.getElementById("results");
+        resultsContainer.innerHTML = results
+          .map(
+            (project) =>
+              `<a href="https://github.com/PatrickMagAnime/${project
+                .replace(/\s+/g, "-")
+                .toLowerCase()}" target="_blank">${project}</a>`
+          )
+          .join("<br>");
+      }
 
-        function updateBackgroundColor() {
-            const date = new Date();
-            const minutes = date.getMinutes();
-            const red = Math.floor((minutes / 60) * 10) + 245;
-            const green = Math.floor(((60 - minutes) / 60) * 10) + 245;
-            const blue = 250;
-            document.getElementById('background').style.background = `rgb(${red}, ${green}, ${blue})`;
-        }
+      function getColorFromSeconds(seconds) {
+        const hue = (seconds / 3600) * 360; // Farbton in HSL basierend auf den Sekunden (3600 Sekunden = 1 Stunde)
+        return `hsl(${hue}, 70%, 50%)`;
+      }
 
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            const background = document.getElementById('background');
-            const bgColor = background.style.background.split('(')[1].split(')')[0].split(',').map(Number);
-            const adjustedColor = bgColor.map(color => Math.min(255, Math.max(0, color + (x - y) * 5)));
-            background.style.background = `rgb(${adjustedColor.join(',')})`;
+      function updateBackgroundColor() {
+        const date = new Date();
+        const seconds =
+          date.getSeconds() + date.getMinutes() * 60 + date.getHours() * 3600; // Gesamtzahl der Sekunden seit Mitternacht
+        const background = document.getElementById("background");
+        background.style.background = getColorFromSeconds(seconds);
+      }
+
+      function revealOnScroll() {
+        const elements = document.querySelectorAll(".fade-in");
+        const windowHeight = window.innerHeight;
+        const windowTopPosition = window.scrollY;
+        const windowBottomPosition = windowTopPosition + windowHeight;
+
+        elements.forEach((element) => {
+          const elementHeight = element.offsetHeight;
+          const elementTopPosition = element.offsetTop;
+          const elementBottomPosition = elementTopPosition + elementHeight;
+
+          // Überprüfen, ob das Element sichtbar ist
+          if (
+            elementBottomPosition >= windowTopPosition &&
+            elementTopPosition <= windowBottomPosition
+          ) {
+            element.style.opacity = 1;
+          }
         });
+      }
 
-        setInterval(updateBackgroundColor, 60000); // Update background color every minute
-        updateBackgroundColor(); // Initial call to set background color
+      function revealWelcomeText() {
+        const welcomeText = document.getElementById("welcome-text");
+        welcomeText.style.opacity = 1;
+      }
+	
+	window.onload = function () {
+        // Scroll down to hide the search bar
+        window.scrollTo(
+          0,
+          document.querySelector(".search-bar-container").offsetHeight + 10
+        );
+      };
+
+
+      document.addEventListener("scroll", revealOnScroll);
+
+      document.addEventListener("mousemove", (e) => {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        const brightnessAdjustment = 1 + (x - y) * 0.05; // Sehr subtile Anpassung
+        const background = document.getElementById("background");
+        background.style.filter = `brightness(${brightnessAdjustment})`;
+      });
+
+      setInterval(updateBackgroundColor, 1000); // Hintergrundfarbe jede Sekunde aktualisieren
+      updateBackgroundColor(); // Erste Initialisierung der Hintergrundfarbe
+      revealWelcomeText(); // Begrüßungstext sichtbar machen
+      revealOnScroll(); // Erste Initialisierung der Sichtbarkeit
     </script>
-</body>
+
+    <!-- Bootstrap JS (optional, für interaktive Komponenten) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  </body>
 </html>

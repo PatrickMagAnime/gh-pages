@@ -96,9 +96,9 @@
         function updateBackgroundColor() {
             const date = new Date();
             const minutes = date.getMinutes();
-            const red = Math.floor((minutes / 59) * 255);
-            const green = Math.floor(((59 - minutes) / 59) * 255);
-            const blue = 128;
+            const red = Math.floor((minutes / 60) * 10) + 245;
+            const green = Math.floor(((60 - minutes) / 60) * 10) + 245;
+            const blue = 250;
             document.getElementById('background').style.background = `rgb(${red}, ${green}, ${blue})`;
         }
 
@@ -107,7 +107,7 @@
             const y = e.clientY / window.innerHeight;
             const background = document.getElementById('background');
             const bgColor = background.style.background.split('(')[1].split(')')[0].split(',').map(Number);
-            const adjustedColor = bgColor.map(color => Math.min(255, Math.max(0, color + (x - y) * 100)));
+            const adjustedColor = bgColor.map(color => Math.min(255, Math.max(0, color + (x - y) * 5)));
             background.style.background = `rgb(${adjustedColor.join(',')})`;
         });
 

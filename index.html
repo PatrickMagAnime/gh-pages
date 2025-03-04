@@ -11,46 +11,55 @@
         <h1>Welcome to Patrick's GitHub Page</h1>
         <nav>
             <ul>
-                <li><a href="#home" onclick="showSection('home')">Home</a></li>
-                <li><a href="#about" onclick="showSection('about')">About Me</a></li>
-                <li><a href="#projects" onclick="showSection('projects')">My Projects</a></li>
-                <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#projects">My Projects</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+        <button id="theme-toggle">Toggle Dark/Light Mode</button>
     </header>
-    <main>
-        <section id="home" class="section active">
-            <h2>Home</h2>
-            <p>This is the main page where you can find an overview of my projects and links to my social media channels.</p>
-        </section>
-        <section id="about" class="section">
-            <h2>About Me</h2>
-            <p>Hello! I'm Patrick, a passionate developer and content creator. Here you can find my projects and links to my social media channels.</p>
-        </section>
-        <section id="projects" class="section">
-            <h2>My Projects</h2>
-            <ul>
-                <li><a href="https://github.com/PatrickMagAnime/obidibidan">Obidibidan</a> - A repository for my Obsidian Vault.</li>
-                <li><a href="https://github.com/PatrickMagAnime/SEW_Schule">SEW_Schule</a> - My school projects for the subject Softwareentwicklung und Wirtschaft (SEW).</li>
-                <li><a href="https://github.com/PatrickMagAnime/osu_skin">Osu Skin</a> - Various skins for the game osu!</li>
-                <li><a href="https://github.com/PatrickMagAnime/VideoSplitter-V4">Video Splitter V4</a> - A tool to help you split and edit videos.</li>
-            </ul>
-        </section>
-        <section id="contact" class="section">
-            <h2>Contact</h2>
-            <p>You can find me on YouTube: <a href="https://www.youtube.com/@OsuStandardReplays">OsuStandardReplays</a> and <a href="https://www.youtube.com/@patrickmaganime">PatrickMagAnime</a></p>
-        </section>
-    </main>
+    <section id="about">
+        <h2>About Me</h2>
+        <img src="https://avatars.githubusercontent.com/u/142892344?v=4" alt="Profile Picture" class="profile-pic">
+        <p>Hello! I'm Patrick, a passionate developer and content creator. Here you can find my projects and links to my social media channels. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+    </section>
+    <section id="projects">
+        <h2>My Projects</h2>
+        <ul>
+            <li><a href="https://github.com/PatrickMagAnime/obidibidan">Obidibidan</a> - A repository for my Obsidian Vault.</li>
+            <li><a href="https://github.com/PatrickMagAnime/SEW_Schule">SEW_Schule</a> - My school projects for the subject Softwareentwicklung und Wirtschaft (SEW).</li>
+            <li><a href="https://github.com/PatrickMagAnime/osu_skin">Osu Skin</a> - Various skins for the game osu!</li>
+            <li><a href="https://github.com/PatrickMagAnime/VideoSplitter-V4">Video Splitter V4</a> - A tool to help you split and edit videos.</li>
+        </ul>
+    </section>
+    <section id="blog">
+        <h2>Blog</h2>
+        <article>
+            <h3>First Blog Post</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.</p>
+        </article>
+    </section>
+    <section id="contact">
+        <h2>Contact</h2>
+        <form id="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+        <p>You can also find me on YouTube: <a href="https://www.youtube.com/@OsuStandardReplays">OsuStandardReplays</a> and <a href="https://www.youtube.com/@patrickmaganime">PatrickMagAnime</a></p>
+    </section>
     <footer>
         <p>&copy; 2025 Patrick. All rights reserved.</p>
+        <div class="social-media">
+            <a href="https://github.com/PatrickMagAnime"><img src="github-logo.png" alt="GitHub"></a>
+            <a href="https://www.youtube.com/@OsuStandardReplays"><img src="youtube-logo.png" alt="YouTube"></a>
+        </div>
     </footer>
-    <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active');
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,231 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PatrickMagAnime Portfolio</title>
-    <!-- Bootstrap 5 CSS einbinden -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
-    <style>
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: transparent;
-        overflow-x: hidden; /* Um horizontales Scrollen zu vermeiden */
-      }
-      .background {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        z-index: -1; /* Hintergrund hinter allem anderen */
-        transition: filter 0.1s ease;
-      }
-      .search-bar-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding-top: 20px;
-        position: relative;
-      }
-      .search-bar-container img {
-        width: 30px; /* Größe des PNG-Icons */
-        margin-right: 10px;
-      }
-      .search-bar {
-        width: 300px;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        background: transparent;
-        color: #fff;
-      }
-      .search-bar::placeholder {
-        color: #fff;
-      }
-      .search-bar-container::after {
-        content: "";
-        position: absolute;
-        bottom: -5px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90%;
-        height: 2px;
-        background: #000;
-      }
-      .container {
-        text-align: center;
-        margin-top: calc(50vh - 40px); /* Adjusted to center Welcome text */
-      }
-      .animated-text {
-        font-size: 3em;
-        opacity: 0;
-        transition: opacity 1s ease-in-out;
-      }
-      .content {
-        padding: 20px;
-        text-align: center;
-        margin-top: 80vh; /* Adjusted for better positioning of About Me and Projects */
-      }
-      .content h2,
-      .content p,
-      .content .button {
-        opacity: 0;
-        transition: opacity 1s ease-in-out;
-      }
-      .button {
-        padding: 15px 30px;
-        margin: 10px;
-        background: #3498db;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: transform 0.2s, background 0.2s;
-      }
-      .button:hover {
-        transform: scale(1.1);
-        background: #2980b9;
-      }
-      .about-projects {
-        display: flex;
-        justify-content: center;
-        gap: 50px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="background" id="background"></div>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patrick's GitHub Page</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+<body>
     <header>
-      <!-- Suchleiste mit Icon -->
-      <div class="search-bar-container">
-        <img src="suchleiste.png" alt="Search Icon" />
-        <!-- Hier das Such-Icon einfügen -->
-        <input
-          type="text"
-          class="search-bar"
-          placeholder="Search my projects..."
-          oninput="searchProjects()"
-        />
-      </div>
+        <h1>Welcome to Patrick's GitHub Page</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#projects">My Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
-
-    <div class="container">
-      <div class="animated-text" id="welcome-text">Welcome to My Projects</div>
-      <div id="results"></div>
-      <!-- Hier werden die Suchergebnisse angezeigt -->
-    </div>
-
-    <div class="content">
-      <div class="about-projects">
-        <div>
-          <h2 class="fade-in">About Me</h2>
-          <p class="fade-in">
-            This is where you can add information about yourself.
-          </p>
-          <!-- Hier kannst du deinen Text über dich einfügen -->
-        </div>
-        <div>
-          <h2 class="fade-in">Projects</h2>
-          <p class="fade-in">
-            This is where you can add information about your projects.
-          </p>
-          <!-- Hier kannst du deinen Text über Projekte einfügen -->
-          <button class="button fade-in">Project 1</button>
-          <button class="button fade-in">Project 2</button>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      const projects = ["Project 1", "Project 2", "Project 3"]; // Du kannst hier weitere Projekte hinzufügen
-
-      function searchProjects() {
-        const query = document.querySelector(".search-bar").value.toLowerCase();
-        const results = projects.filter((project) =>
-          project.toLowerCase().includes(query)
-        );
-        const resultsContainer = document.getElementById("results");
-        resultsContainer.innerHTML = results
-          .map(
-            (project) =>
-              `<a href="https://github.com/PatrickMagAnime/${project
-                .replace(/\s+/g, "-")
-                .toLowerCase()}" target="_blank">${project}</a>`
-          )
-          .join("<br>");
-      }
-
-      function getColorFromSeconds(seconds) {
-        const hue = (seconds / 3600) * 360; // Farbton in HSL basierend auf den Sekunden (3600 Sekunden = 1 Stunde)
-        return `hsl(${hue}, 70%, 50%)`;
-      }
-
-      function updateBackgroundColor() {
-        const date = new Date();
-        const seconds =
-          date.getSeconds() + date.getMinutes() * 60 + date.getHours() * 3600; // Gesamtzahl der Sekunden seit Mitternacht
-        const background = document.getElementById("background");
-        background.style.background = getColorFromSeconds(seconds);
-      }
-
-      function revealOnScroll() {
-        const elements = document.querySelectorAll(".fade-in");
-        const windowHeight = window.innerHeight;
-        const windowTopPosition = window.scrollY;
-        const windowBottomPosition = windowTopPosition + windowHeight;
-
-        elements.forEach((element) => {
-          const elementHeight = element.offsetHeight;
-          const elementTopPosition = element.offsetTop;
-          const elementBottomPosition = elementTopPosition + elementHeight;
-
-          // Überprüfen, ob das Element sichtbar ist
-          if (
-            elementBottomPosition >= windowTopPosition &&
-            elementTopPosition <= windowBottomPosition
-          ) {
-            element.style.opacity = 1;
-          }
-        });
-      }
-
-      function revealWelcomeText() {
-        const welcomeText = document.getElementById("welcome-text");
-        welcomeText.style.opacity = 1;
-      }
-	
-	window.onload = function () {
-        // Scroll down to hide the search bar
-        window.scrollTo(
-          0,
-          document.querySelector(".search-bar-container").offsetHeight + 10
-        );
-      };
-
-
-      document.addEventListener("scroll", revealOnScroll);
-
-      document.addEventListener("mousemove", (e) => {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-        const brightnessAdjustment = 1 + (x - y) * 0.05; // Sehr subtile Anpassung
-        const background = document.getElementById("background");
-        background.style.filter = `brightness(${brightnessAdjustment})`;
-      });
-
-      setInterval(updateBackgroundColor, 1000); // Hintergrundfarbe jede Sekunde aktualisieren
-      updateBackgroundColor(); // Erste Initialisierung der Hintergrundfarbe
-      revealWelcomeText(); // Begrüßungstext sichtbar machen
-      revealOnScroll(); // Erste Initialisierung der Sichtbarkeit
-    </script>
-
-    <!-- Bootstrap JS (optional, für interaktive Komponenten) -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-  </body>
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hello! I'm Patrick, a passionate developer and content creator. Here you can find my projects and links to my social media channels.</p>
+    </section>
+    <section id="projects">
+        <h2>My Projects</h2>
+        <ul>
+            <li><a href="https://github.com/PatrickMagAnime/obidibidan">Obidibidan</a> - A repository for my Obsidian Vault.</li>
+            <li><a href="https://github.com/PatrickMagAnime/SEW_Schule">SEW_Schule</a> - My school projects for the subject Softwareentwicklung und Wirtschaft (SEW).</li>
+            <li><a href="https://github.com/PatrickMagAnime/osu_skin">Osu Skin</a> - Various skins for the game osu!</li>
+            <li><a href="https://github.com/PatrickMagAnime/VideoSplitter-V4">Video Splitter V4</a> - A tool to help you split and edit videos.</li>
+        </ul>
+    </section>
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>You can find me on YouTube: <a href="https://www.youtube.com/@OsuStandardReplays">OsuStandardReplays</a> and <a href="https://www.youtube.com/@patrickmaganime">PatrickMagAnime</a></p>
+    </section>
+    <footer>
+        <p>&copy; 2025 Patrick. All rights reserved.</p>
+    </footer>
+</body>
 </html>
